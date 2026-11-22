@@ -1,9 +1,9 @@
 # Little Web Hero — playable build
 
-This repository is the **public, prebuilt mirror** of
-[`Nomoshkar/little-web-hero`](https://github.com/Nomoshkar/little-web-hero).
-It contains only the Vite production output (`index.html`, hashed `assets/`,
-`icons/`, `manifest.webmanifest`) and is served by GitHub Pages:
+This repository is the **public, prebuilt mirror** of the Little Web Hero
+source project. It contains only the Vite production output (`index.html`,
+hashed `assets/`, `icons/`, `manifest.webmanifest`) and is served by GitHub
+Pages:
 
 **https://nomoshkar.github.io/little-web-hero-web/**
 
@@ -35,9 +35,9 @@ Preserved across publishes: `.git/`, `.gitattributes`, `.gitignore`,
    `Build <source-sha>` and matches `git rev-parse --short HEAD` in the source
    repo.
 
-The source repo's [`.agent/deployment.md`](https://github.com/Nomoshkar/little-web-hero/blob/main/.agent/deployment.md)
-is the full runbook: Pages settings, the optional Actions mirror, what ships,
-and the mobile/touch contract.
+The source project's `.agent/deployment.md` is the full runbook: Pages
+settings, the optional Actions mirror, what ships, and the mobile/touch
+contract.
 
 ## GitHub Pages settings
 

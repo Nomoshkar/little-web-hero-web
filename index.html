@@ -13,9 +13,9 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd23f' stroke='%23e8a013' stroke-width='1' d='M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-DAVEhi7j.js"></script>
+  <script type="module" crossorigin src="./assets/index-CC5KO6iS.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/three-DguST1eR.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-mH0JANbh.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-Cy9uY3zO.css">
 </head>
 <body>
   <!-- ============ Pre-boot performance setup ============ -->
@@ -156,6 +156,15 @@
       </div>
       <div id="hint">Hold <b>SPACE</b> to swing!</div>
       <div id="interact" class="hidden"><span id="interact-key">E</span><span id="interact-text"></span></div>
+
+      <!-- Touch controls live inside the HUD so the menu / dress-up screen
+           never show a steering ball or SWING button floating over them. -->
+      <div id="touch-ui" class="hidden">
+        <div id="joy-base" role="group" aria-label="Steering"><div id="joy-knob"></div></div>
+        <div id="btn-boost" role="button" aria-label="Boost"><span>&#9889;</span>BOOST</div>
+        <div id="btn-swing" role="button" aria-label="Swing"><span>&#127983;</span>SWING</div>
+        <div id="btn-help" role="button" aria-label="Back to a safe spot" title="Back to a safe spot">&#127968;</div>
+      </div>
     </div>
 
     <!-- ============ Big celebration banner ============ -->
@@ -166,14 +175,6 @@
 
     <!-- ============ Floating +1 popups ============ -->
     <div id="popups"></div>
-
-    <!-- ============ Touch controls (tablets / phones) ============ -->
-    <div id="touch-ui" class="hidden">
-      <div id="joy-base"><div id="joy-knob"></div></div>
-      <div id="btn-boost"><span>&#9889;</span>BOOST</div>
-      <div id="btn-swing"><span>&#127983;</span>SWING</div>
-      <div id="btn-help" title="Back to a safe spot">&#127968;</div>
-    </div>
 
     <!-- ============ Dress-up / character screen ============ -->
     <div id="dressup" class="overlay dressup hidden">
