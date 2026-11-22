@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "title": "Little Web Hero — coral reef props",
+  "note": "AI-generated hero coral: Flux 2 Klein reference image, Trellis 2 image-to-3D, cleaned and decimated in Blender (origin at base centre, metres, one material, WebP maps). Local only; the reef's procedural coral is the fallback.",
+  "models": [
+    {
+      "id": "coral-brain",
+      "file": "assets/world/reef/coral-brain.glb",
+      "kind": "coral",
+      "height": 1.14,
+      "footprint": 1.6,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "coral-staghorn",
+      "file": "assets/world/reef/coral-staghorn.glb",
+      "kind": "coral",
+      "height": 1.59,
+      "footprint": 1.6,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "coral-anemone",
+      "file": "assets/world/reef/coral-anemone.glb",
+      "kind": "coral",
+      "height": 1.23,
+      "footprint": 1.6,
+      "tris": 1194,
+      "texture": 512
+    },
+    {
+      "id": "wreck-anchor",
+      "file": "assets/world/reef/wreck-anchor.glb",
+      "kind": "wreck",
+      "height": 2.4,
+      "footprint": 1.7,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "wreck-cannon",
+      "file": "assets/world/reef/wreck-cannon.glb",
+      "kind": "wreck",
+      "height": 1.59,
+      "footprint": 2.2,
+      "tris": 1198,
+      "texture": 512
+    },
+    {
+      "id": "wreck-wheel",
+      "file": "assets/world/reef/wreck-wheel.glb",
+      "kind": "wreck",
+      "height": 1.16,
+      "footprint": 1.2,
+      "tris": 1191,
+      "texture": 512
+    }
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "version": 1,
+  "generated": "2026-10-31",
+  "title": "Little Web Hero — world cast & traffic",
+  "note": "Models from the Kenney Car Kit and Mini Characters packs, plus the Gobkit animal packs (all CC0 1.0). Colour maps are baked into vertex colours; no runtime texture fetch.",
+  "sources": [
+    {
+      "name": "Car Kit",
+      "author": "Kenney",
+      "url": "https://kenney.nl/assets/car-kit",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloaded": "2026-10-31"
+    },
+    {
+      "name": "Mini Characters 1",
+      "author": "Kenney",
+      "url": "https://kenney.nl/assets/mini-characters-1",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloaded": "2026-10-31"
+    },
+    {
+      "name": "Gobkit Animal Packs",
+      "author": "Gobkit",
+      "url": "https://gobkit.com/freebies",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloaded": "2026-11-01"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "sedan",
+      "file": "assets/world/vehicles/sedan.glb",
+      "weight": 30,
+      "length": 4,
+      "width": 1.976,
+      "height": 1.804,
+      "wheelRadius": 0.471,
+      "wheelWidth": 0.461,
+      "wheels": {
+        "frontRight": {
+          "x": 1.0352940852418309,
+          "y": 0.4705882440938808,
+          "z": 0.3952941250388599
+        },
+        "backLeft": {
+          "x": -1.0352940852418309,
+          "y": 0.4705882440938808,
+          "z": -0.3952941250388599
+        },
+        "backRight": {
+          "x": -1.0352940852418309,
+          "y": 0.4705882440938808,
+          "z": 0.3952941250388598
+        },
+        "frontLeft": {
+          "x": 1.0352940852418309,
+          "y": 0.4705882440938808,
+          "z": -0.3952941250388598
+        }
+      }
+    },
+    {
+      "id": "taxi",
+      "file": "assets/world/vehicles/taxi.glb",
+      "weight": 14,
+      "length": 4.1,
+      "width": 1.879,
+      "height": 2.013,
+      "wheelRadius": 0.447,
+      "wheelWidth": 0.376,
+      "wheels": {
+        "frontRight": {
+          "x": 1.1330910073272535,
+          "y": 0.4472727660502317,
+          "z": 0.37570912348219465
+        },
+        "frontLeft": {
+          "x": 1.1330910073272535,
+          "y": 0.4472727660502317,
+          "z": -0.37570912348219454
+        },
+        "backLeft": {
+          "x": -1.1330910073272535,
+          "y": 0.4472727660502317,
+          "z": -0.37570912348219465
+        },
+        "backRight": {
+          "x": -1.1330910073272535,
+          "y": 0.4472727660502317,
+          "z": 0.37570912348219454
+        }
+      }
+    },
+    {
+      "id": "hatchback",
+      "file": "assets/world/vehicles/hatchback.glb",
+      "weight": 9,
+      "length": 3.8,
+      "width": 1.456,
+      "height": 1.267,
+      "wheelRadius": 0.4,
+      "wheelWidth": 0.392,
+      "wheels": {
+        "frontRight": {
+          "x": 1.0799998697911506,
+          "y": 0.3999999799226469,
+          "z": 0.33599998313502344
+        },
+        "frontLeft": {
+          "x": 1.0799998697911506,
+          "y": 0.3999999799226469,
+          "z": -0.33599998313502333
+        },
+        "backRight": {
+          "x": -1.0799998697911506,
+          "y": 0.3999999799226469,
+          "z": 0.33599998313502333
+        },
+        "backLeft": {
+          "x": -1.0799998697911506,
+          "y": 0.3999999799226469,
+          "z": -0.33599998313502344
+        }
+      }
+    },
+    {
+      "id": "suv",
+      "file": "assets/world/vehicles/suv.glb",
+      "weight": 10,
+      "length": 4.2,
+      "width": 2.075,
+      "height": 1.812,
+      "wheelRadius": 0.494,
+      "wheelWidth": 0.484,
+      "wheels": {
+        "backRight": {
+          "x": -0.9223530446616953,
+          "y": 0.4941177024973367,
+          "z": 0.41505887009776277
+        },
+        "backLeft": {
+          "x": -0.9223530446616953,
+          "y": 0.4941177024973367,
+          "z": -0.41505887009776293
+        },
+        "frontLeft": {
+          "x": 1.2517648463265865,
+          "y": 0.4941177024973367,
+          "z": -0.41505887009776277
+        },
+        "frontRight": {
+          "x": 1.2517648463265865,
+          "y": 0.4941177024973367,
+          "z": 0.41505887009776293
+        }
+      }
+    },
+    {
+      "id": "van",
+      "file": "assets/world/vehicles/van.glb",
+      "weight": 9,
+      "length": 4.6,
+      "width": 2.108,
+      "height": 2.007,
+      "wheelRadius": 0.502,
+      "wheelWidth": 0.492,
+      "wheels": {
+        "frontRight": {
+          "x": 1.2712726170563595,
+          "y": 0.5018181383117208,
+          "z": 0.42152723618184557
+        },
+        "frontLeft": {
+          "x": 1.2712726170563595,
+          "y": 0.5018181383117208,
+          "z": -0.4215272361818454
+        },
+        "backRight": {
+          "x": -1.2712726170563595,
+          "y": 0.5018181383117208,
+          "z": 0.4215272361818454
+        },
+        "backLeft": {
+          "x": -1.2712726170563595,
+          "y": 0.5018181383117208,
+          "z": -0.42152723618184557
+        }
+      }
+    },
+    {
+      "id": "truck",
+      "file": "assets/world/vehicles/truck.glb",
+      "weight": 6,
+      "length": 4.3,
+      "width": 1.837,
+      "height": 1.676,
+      "wheelRadius": 0.437,
+      "wheelWidth": 0.429,
+      "wheels": {
+        "frontRight": {
+          "x": 1.2535595043963987,
+          "y": 0.4372881992080461,
+          "z": 0.3673220873347588
+        },
+        "frontLeft": {
+          "x": 1.2535595043963987,
+          "y": 0.4372881992080461,
+          "z": -0.36732208733475863
+        },
+        "backRight": {
+          "x": -1.1077967713270502,
+          "y": 0.4372881992080461,
+          "z": 0.36732208733475863
+        },
+        "backLeft": {
+          "x": -1.1077967713270502,
+          "y": 0.4372881992080461,
+          "z": -0.3673220873347588
+        }
+      }
+    },
+    {
+      "id": "delivery",
+      "file": "assets/world/vehicles/delivery.glb",
+      "weight": 5,
+      "length": 5.2,
+      "width": 2.016,
+      "height": 2.4,
+      "wheelRadius": 0.48,
+      "wheelWidth": 0.403,
+      "wheels": {
+        "frontRight": {
+          "x": 1.6160001185490622,
+          "y": 0.4800000352125927,
+          "z": 0.403200029578578
+        },
+        "frontLeft": {
+          "x": 1.6160001185490622,
+          "y": 0.4800000352125927,
+          "z": -0.40320002957857776
+        },
+        "backRight": {
+          "x": -0.9760000715989385,
+          "y": 0.4800000352125927,
+          "z": 0.40320002957857776
+        },
+        "backLeft": {
+          "x": -0.9760000715989385,
+          "y": 0.4800000352125927,
+          "z": -0.403200029578578
+        }
+      }
+    },
+    {
+      "id": "garbage",
+      "file": "assets/world/vehicles/garbage.glb",
+      "weight": 2,
+      "length": 6,
+      "width": 2.337,
+      "height": 2.565,
+      "wheelRadius": 0.522,
+      "wheelWidth": 0.438,
+      "wheels": {
+        "frontLeft": {
+          "x": 1.9304349560368197,
+          "y": 0.5217391773072485,
+          "z": -0.4382609089380886
+        },
+        "frontRight": {
+          "x": 1.9304349560368197,
+          "y": 0.5217391773072485,
+          "z": 0.43826090893808883
+        },
+        "backRight": {
+          "x": -0.8869566014223225,
+          "y": 0.5217391773072485,
+          "z": 0.4382609089380886
+        },
+        "backLeft": {
+          "x": -0.8869566014223225,
+          "y": 0.5217391773072485,
+          "z": -0.43826090893808883
+        }
+      }
+    },
+    {
+      "id": "firetruck",
+      "file": "assets/world/vehicles/firetruck.glb",
+      "weight": 1,
+      "length": 6.4,
+      "width": 2.372,
+      "height": 2.824,
+      "wheelRadius": 0.565,
+      "wheelWidth": 0.474,
+      "wheels": {
+        "frontRight": {
+          "x": 1.807058971088782,
+          "y": 0.5647059061123023,
+          "z": 0.6324706148457787
+        },
+        "frontLeft": {
+          "x": 1.807058971088782,
+          "y": 0.5647059061123023,
+          "z": -0.6324706148457785
+        },
+        "backRight": {
+          "x": -1.2423529313294153,
+          "y": 0.5647059061123023,
+          "z": 0.6324706148457785
+        },
+        "backLeft": {
+          "x": -1.2423529313294153,
+          "y": 0.5647059061123023,
+          "z": -0.6324706148457787
+        }
+      }
+    },
+    {
+      "id": "police",
+      "file": "assets/world/vehicles/police.glb",
+      "weight": 2,
+      "length": 4,
+      "width": 1.626,
+      "height": 1.436,
+      "wheelRadius": 0.387,
+      "wheelWidth": 0.325,
+      "wheels": {
+        "backLeft": {
+          "x": -1.045161329309752,
+          "y": 0.38709681587338773,
+          "z": -0.3251613253336457
+        },
+        "frontLeft": {
+          "x": 1.045161329309752,
+          "y": 0.38709681587338773,
+          "z": -0.3251613253336456
+        },
+        "backRight": {
+          "x": -1.045161329309752,
+          "y": 0.38709681587338773,
+          "z": 0.3251613253336456
+        },
+        "frontRight": {
+          "x": 1.045161329309752,
+          "y": 0.38709681587338773,
+          "z": 0.3251613253336457
+        }
+      }
+    },
+    {
+      "id": "ambulance",
+      "file": "assets/world/vehicles/ambulance.glb",
+      "weight": 1,
+      "length": 4.8,
+      "width": 1.861,
+      "height": 2.363,
+      "wheelRadius": 0.443,
+      "wheelWidth": 0.372,
+      "wheels": {
+        "frontRight": {
+          "x": 1.491692417122211,
+          "y": 0.44307695558085475,
+          "z": 0.37218464268791807
+        },
+        "frontLeft": {
+          "x": 1.491692417122211,
+          "y": 0.44307695558085475,
+          "z": -0.37218464268791795
+        },
+        "backRight": {
+          "x": -1.3440000498567943,
+          "y": 0.44307695558085475,
+          "z": 0.37218464268791795
+        },
+        "backLeft": {
+          "x": -1.3440000498567943,
+          "y": 0.44307695558085475,
+          "z": -0.37218464268791807
+        }
+      }
+    },
+    {
+      "id": "race",
+      "file": "assets/world/vehicles/race.glb",
+      "weight": 3,
+      "length": 4.1,
+      "width": 1.615,
+      "height": 1.013,
+      "wheelRadius": 0.481,
+      "wheelWidth": 0.404,
+      "wheels": {
+        "frontLeft": {
+          "x": 1.024908826373346,
+          "y": 0.4805114533052967,
+          "z": -0.4709012242391907
+        },
+        "frontRight": {
+          "x": 1.024908826373346,
+          "y": 0.4805114533052967,
+          "z": 0.4709012242391909
+        },
+        "backLeft": {
+          "x": -1.4096823768696731,
+          "y": 0.4805114533052967,
+          "z": -0.4709012242391909
+        },
+        "backRight": {
+          "x": -1.4096823768696731,
+          "y": 0.4805114533052967,
+          "z": 0.4709012242391907
+        }
+      }
+    }
+  ],
+  "people": [
+    {
+      "id": "female-a",
+      "file": "assets/world/people/character-female-a.glb",
+      "height": 0.776,
+      "vertices": 1576
+    },
+    {
+      "id": "female-b",
+      "file": "assets/world/people/character-female-b.glb",
+      "height": 0.776,
+      "vertices": 1322
+    },
+    {
+      "id": "female-c",
+      "file": "assets/world/people/character-female-c.glb",
+      "height": 0.776,
+      "vertices": 1322
+    },
+    {
+      "id": "female-d",
+      "file": "assets/world/people/character-female-d.glb",
+      "height": 0.776,
+      "vertices": 1401
+    },
+    {
+      "id": "female-e",
+      "file": "assets/world/people/character-female-e.glb",
+      "height": 0.776,
+      "vertices": 1270
+    },
+    {
+      "id": "female-f",
+      "file": "assets/world/people/character-female-f.glb",
+      "height": 0.776,
+      "vertices": 1410
+    },
+    {
+      "id": "male-a",
+      "file": "assets/world/people/character-male-a.glb",
+      "height": 0.776,
+      "vertices": 1259
+    },
+    {
+      "id": "male-b",
+      "file": "assets/world/people/character-male-b.glb",
+      "height": 0.776,
+      "vertices": 1266
+    },
+    {
+      "id": "male-c",
+      "file": "assets/world/people/character-male-c.glb",
+      "height": 0.776,
+      "vertices": 1455
+    },
+    {
+      "id": "male-d",
+      "file": "assets/world/people/character-male-d.glb",
+      "height": 0.776,
+      "vertices": 1239
+    },
+    {
+      "id": "male-e",
+      "file": "assets/world/people/character-male-e.glb",
+      "height": 0.776,
+      "vertices": 1208
+    },
+    {
+      "id": "male-f",
+      "file": "assets/world/people/character-male-f.glb",
+      "height": 0.776,
+      "vertices": 1291
+    }
+  ],
+  "clips": [
+    "static",
+    "idle",
+    "walk",
+    "sprint",
+    "jump",
+    "fall",
+    "crouch",
+    "sit",
+    "drive",
+    "die",
+    "pick-up",
+    "emote-yes",
+    "emote-no",
+    "holding-right",
+    "holding-left",
+    "holding-both",
+    "holding-right-shoot",
+    "holding-left-shoot",
+    "holding-both-shoot",
+    "attack-melee-right",
+    "attack-melee-left",
+    "attack-kick-right",
+    "attack-kick-left",
+    "interact-right",
+    "interact-left",
+    "wheelchair-sit",
+    "wheelchair-look-left",
+    "wheelchair-look-right",
+    "wheelchair-move-forward",
+    "wheelchair-move-back",
+    "wheelchair-move-left",
+    "wheelchair-move-right"
+  ],
+  "animals": [
+    {
+      "id": "elephant",
+      "file": "assets/world/animals/Elephant.glb",
+      "height": 2.8
+    },
+    {
+      "id": "lion",
+      "file": "assets/world/animals/Lion.glb",
+      "height": 1.2
+    },
+    {
+      "id": "zebra",
+      "file": "assets/world/animals/Zebra.glb",
+      "height": 1.6
+    },
+    {
+      "id": "tiger",
+      "file": "assets/world/animals/Tiger.glb",
+      "height": 1.05
+    },
+    {
+      "id": "seal",
+      "file": "assets/world/animals/Seal.glb",
+      "height": 0.9
+    },
+    {
+      "id": "penguin",
+      "file": "assets/world/animals/Penguin.glb",
+      "height": 0.8
+    },
+    {
+      "id": "flamingo",
+      "file": "assets/world/animals/Flamingo.glb",
+      "height": 1.25
+    },
+    {
+      "id": "peacock",
+      "file": "assets/world/animals/Peacock.glb",
+      "height": 0.85
+    }
+  ]
+}

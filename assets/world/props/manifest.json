@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "title": "Little Web Hero — street and rooftop props",
+  "note": "AI-generated street furniture: Flux 2 Klein reference, Trellis 2 image-to-3D, cleaned in Blender (base-centre origin, metres, one material, 512 WebP maps). Optional: the procedural street furniture and rooftop clutter are the fallback if a file is missing.",
+  "models": [
+    {
+      "id": "street-hydrant",
+      "file": "assets/world/props/street-hydrant.glb",
+      "height": 0.85,
+      "footprint": 0.5,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "roof-ac",
+      "file": "assets/world/props/roof-ac.glb",
+      "height": 1.1,
+      "footprint": 1.1,
+      "tris": 1070,
+      "texture": 512
+    },
+    {
+      "id": "street-bench",
+      "file": "assets/world/props/street-bench.glb",
+      "height": 1.29,
+      "footprint": 1.9,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "street-planter",
+      "file": "assets/world/props/street-planter.glb",
+      "height": 1.19,
+      "footprint": 1.3,
+      "tris": 905,
+      "texture": 512
+    },
+    {
+      "id": "street-bollard",
+      "file": "assets/world/props/street-bollard.glb",
+      "height": 0.9,
+      "footprint": 0.33,
+      "tris": 1198,
+      "texture": 512
+    },
+    {
+      "id": "street-mailbox",
+      "file": "assets/world/props/street-mailbox.glb",
+      "height": 1.15,
+      "footprint": 0.46,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "street-newsbox",
+      "file": "assets/world/props/street-newsbox.glb",
+      "height": 1.1,
+      "footprint": 0.64,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "street-bin",
+      "file": "assets/world/props/street-bin.glb",
+      "height": 0.9,
+      "footprint": 0.57,
+      "tris": 1196,
+      "texture": 512
+    },
+    {
+      "id": "street-aframe",
+      "file": "assets/world/props/street-aframe.glb",
+      "height": 0.95,
+      "footprint": 0.59,
+      "tris": 1200,
+      "texture": 512
+    },
+    {
+      "id": "street-shelter",
+      "file": "assets/world/props/street-shelter.glb",
+      "height": 2.6,
+      "footprint": 2.4,
+      "tris": 1192,
+      "texture": 512
+    }
+  ]
+}

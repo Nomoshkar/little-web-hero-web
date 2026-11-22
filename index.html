@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#4aa8ff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Little Web Hero" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Little Web Hero</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd23f' stroke='%23e8a013' stroke-width='1' d='M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z'/%3E%3C/svg%3E" />
+  <script type="module" crossorigin src="./assets/index-DAVEhi7j.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/three-DguST1eR.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-mH0JANbh.css">
+</head>
+<body>
+  <!-- ============ Pre-boot performance setup ============ -->
+  <!-- Static markup so it paints before the (deferred) module script starts.
+       src/ui/bootOptions.js hides it for automated runs and binds the choices. -->
+  <div id="boot-options" class="boot-options" role="dialog" aria-modal="true" aria-labelledby="boot-title">
+    <div class="panel boot-panel">
+      <div class="boot-head">
+        <div class="boot-logo" aria-hidden="true">&#128376;</div>
+        <div>
+          <h2 id="boot-title">Before we fly&hellip;</h2>
+          <p class="boot-sub">Pick the look that runs smoothly on this device. You can change it any time in Settings<span class="desktop-only">, and press <kbd>G</kbd> in the game for a live performance panel</span>.</p>
+        </div>
+      </div>
+
+      <div class="boot-presets" role="group" aria-label="Performance preset">
+        <button class="boot-preset" data-boot-preset="fast">
+          <span class="bp-icon">&#9889;</span>
+          <span class="bp-name">Fast</span>
+          <span class="bp-blurb">Best for older laptops</span>
+        </button>
+        <button class="boot-preset" data-boot-preset="balanced">
+          <span class="bp-icon">&#127760;</span>
+          <span class="bp-name">Balanced</span>
+          <span class="bp-blurb">Recommended</span>
+        </button>
+        <button class="boot-preset" data-boot-preset="sharp">
+          <span class="bp-icon">&#128302;</span>
+          <span class="bp-name">Sharp</span>
+          <span class="bp-blurb">Extra detail</span>
+        </button>
+        <button class="boot-preset touch-only" data-boot-preset="phone">
+          <span class="bp-icon">&#128241;</span>
+          <span class="bp-name">Phone</span>
+          <span class="bp-blurb">Best battery &amp; speed</span>
+        </button>
+      </div>
+
+      <div class="boot-section-head">
+        <span>Fine tune</span>
+        <b id="boot-preset-note">Balanced</b>
+      </div>
+
+      <div class="boot-toggles">
+        <div class="boot-toggle-row">
+          <span class="bt-label">Sun shadows<i>Real-time shadows from the sun and moon.</i></span>
+          <button class="boot-toggle" data-perf-key="shadows" aria-pressed="true">On</button>
+        </div>
+        <div class="boot-toggle-row">
+          <span class="bt-label">Ambient occlusion<i>Soft contact shading in corners and under props.</i></span>
+          <button class="boot-toggle" data-perf-key="ao" aria-pressed="false">Off</button>
+        </div>
+        <div class="boot-toggle-row">
+          <span class="bt-label">Screen reflections<i>Mirror glints on cars, glass and wet roads. The heaviest pass.</i></span>
+          <button class="boot-toggle" data-perf-key="ssr" aria-pressed="false">Off</button>
+        </div>
+        <div class="boot-toggle-row">
+          <span class="bt-label">Bloom glow<i>Soft halo around bright signs, lamps and the sun.</i></span>
+          <button class="boot-toggle" data-perf-key="bloom" aria-pressed="true">On</button>
+        </div>
+        <div class="boot-toggle-row">
+          <span class="bt-label">Water mirror<i>The harbor reflects the live skyline.</i></span>
+          <button class="boot-toggle" data-perf-key="waterReflections" aria-pressed="true">On</button>
+        </div>
+        <div class="boot-toggle-row">
+          <span class="bt-label">Glass UI blur<i>Frosted-glass panels. Off makes the HUD cheaper.</i></span>
+          <button class="boot-toggle" data-perf-key="uiBlur" aria-pressed="false">Off</button>
+        </div>
+      </div>
+
+      <div class="boot-sliders">
+        <div class="boot-slider">
+          <label for="boot-render-scale">Picture detail</label>
+          <input id="boot-render-scale" type="range" min="50" max="125" step="5" value="85" />
+          <span id="boot-render-scale-label" class="boot-value">85%</span>
+        </div>
+        <div class="boot-slider">
+          <label for="boot-crowd">Crowd</label>
+          <input id="boot-crowd" type="range" min="50" max="200" step="25" value="100" />
+          <span id="boot-crowd-label" class="boot-value">100%</span>
+        </div>
+        <div class="boot-pixels-line">Rendering at about <b id="boot-pixels">—</b> pixels</div>
+      </div>
+
+      <div class="boot-foot">
+        <label class="boot-check">
+          <input id="boot-show-on-start" type="checkbox" checked />
+          <span>Show this screen on startup</span>
+        </label>
+        <button id="boot-start" class="btn green big">&#9654; Start the game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- The 3D canvas is appended here by src/main.js -->
+
+  <!-- ============ Startup loading screen ============ -->
+  <div id="loader" role="status" aria-live="polite">
+    <div id="loader-card">
+      <div id="loader-logo">&#128376;</div>
+      <div id="loader-title"><span>LITTLE</span> <span>WEB</span> <span>HERO</span></div>
+      <div id="loader-spinner" aria-hidden="true"></div>
+      <div id="loader-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="loader-progress-fill"></div>
+      </div>
+      <div id="loader-status">Building the city&hellip;</div>
+      <div id="loader-tip">Tip: hold <b>SPACE</b> to swing and press <b>E</b> at glowing doors!</div>
+    </div>
+  </div>
+
+  <div id="vignette"></div>
+
+  <div id="ui">
+    <!-- ============ HUD (during play) ============ -->
+    <div id="hud" class="hidden">
+      <div id="chips">
+        <div class="chip star" id="star-chip"><span class="icon">&#11088;</span><span id="star-count">0</span></div>
+        <div class="chip ring" id="ring-chip"><span class="icon">&#128171;</span><span id="ring-count">0/8</span></div>
+        <div class="chip mission" id="mission-chip"><span class="icon">&#127942;</span><span id="mission-count">0/40</span></div>
+        <div class="chip lap" id="lap-chip"><span class="icon">&#127936;</span><span id="lap-count">0</span></div>
+      </div>
+      <div id="objective" class="pill">&#128073; <span id="objective-text">Collect sparkling stars!</span></div>
+      <div id="quests" class="hidden"></div>
+      <div id="mission-tracker">
+        <div id="mission-tracker-head"><span>&#127919; Missions</span><span id="mission-progress">0/40</span></div>
+        <div id="mission-list"></div>
+      </div>
+      <div id="minimap-wrap">
+        <canvas id="minimap" width="420" height="420" aria-label="Rotating city minimap"></canvas>
+        <div id="minimap-caption">CITY MAP</div>
+      </div>
+      <div id="top-buttons">
+        <div class="chip time" id="time-chip" title="Day/night cycle — six real minutes per day"><span class="icon" id="time-icon">&#9728;</span><span id="time-label">09:00</span></div>
+        <button id="fullscreen-btn" class="round-btn" title="Fullscreen" aria-label="Toggle fullscreen">&#9974;</button>
+        <button id="daynight-btn" class="round-btn" title="Switch day / night" aria-label="Switch day / night">&#9728;</button>
+        <button id="sound-btn" class="round-btn" title="Sound on/off" aria-label="Toggle sound">&#128266;</button>
+        <button id="pause-btn" class="round-btn" title="Pause" aria-label="Pause">&#10074;&#10074;</button>
+      </div>
+      <div id="hint">Hold <b>SPACE</b> to swing!</div>
+      <div id="interact" class="hidden"><span id="interact-key">E</span><span id="interact-text"></span></div>
+    </div>
+
+    <!-- ============ Big celebration banner ============ -->
+    <div id="banner" class="hidden">
+      <div id="banner-main"></div>
+      <div id="banner-sub"></div>
+    </div>
+
+    <!-- ============ Floating +1 popups ============ -->
+    <div id="popups"></div>
+
+    <!-- ============ Touch controls (tablets / phones) ============ -->
+    <div id="touch-ui" class="hidden">
+      <div id="joy-base"><div id="joy-knob"></div></div>
+      <div id="btn-boost"><span>&#9889;</span>BOOST</div>
+      <div id="btn-swing"><span>&#127983;</span>SWING</div>
+      <div id="btn-help" title="Back to a safe spot">&#127968;</div>
+    </div>
+
+    <!-- ============ Dress-up / character screen ============ -->
+    <div id="dressup" class="overlay dressup hidden">
+      <div id="dressup-panel">
+        <div class="du-col du-col-hero">
+          <h2>&#129485; Dress Up Your Hero!</h2>
+          <div id="characters"></div>
+          <div id="costume-name">Spidey Classic</div>
+        </div>
+        <div class="du-col du-col-picks">
+          <div class="du-label">Costume</div>
+          <div id="swatches"></div>
+          <div class="du-label">Emblem</div>
+          <div id="emblems"></div>
+        </div>
+        <div class="du-col du-col-actions">
+          <button id="cape-btn" class="btn yellow small">Cape: On</button>
+          <button id="dressup-back" class="btn blue small">&#9664; Back</button>
+          <button id="dressup-play" class="btn green small">&#9654; Save & Play!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Minigame overlay (Hero HQ) ============ -->
+    <div id="minigame" class="overlay hidden">
+      <div id="mg-panel">
+        <div id="mg-head">
+          <h2 id="mg-title"></h2>
+          <button id="mg-close" class="btn blue small">&#10006; Close</button>
+        </div>
+        <div id="mg-sub"></div>
+        <div id="mg-body"></div>
+      </div>
+    </div>
+
+    <!-- ============ Pause menu ============ -->
+    <div id="pause-menu" class="overlay hidden">
+      <div class="panel">
+        <h2>&#9208; Paused</h2>
+        <p class="tip">Tip: hold <b>SWING</b> to fly — walk into any wall to climb it!</p>
+        <div id="pause-stats">&#11088; 0 stars &bull; &#127941; 0/40 missions</div>
+        <button id="resume-btn" class="btn green">&#9654; Keep Playing</button>
+        <div class="panel-row">
+          <button id="howto-btn-pause" class="btn blue small">&#127918; How to Play</button>
+          <button id="settings-btn-pause" class="btn yellow small">&#9881; Settings</button>
+        </div>
+        <button id="restart-btn" class="btn yellow">&#8635; Restart</button>
+        <button id="menu-btn" class="btn blue">&#127968; Main Menu</button>
+      </div>
+    </div>
+
+    <!-- ============ Start screen ============ -->
+    <div id="menu" class="overlay">
+      <div id="menu-inner">
+        <h1 id="title"><span class="c1">LITTLE</span> <span class="c2">WEB</span> <span class="c3">HERO</span></h1>
+        <p id="tagline">Swing, fly, and be kind! &#127983;</p>
+        <div id="profile-strip" aria-label="Adventure progress">
+          <div class="pstat"><b id="p-missions">0/40</b><span>Missions</span></div>
+          <div class="pstat"><b id="p-stars">0</b><span>Best stars</span></div>
+          <div class="pstat"><b id="p-time">0m</b><span>Play time</span></div>
+        </div>
+        <button id="play-btn" class="btn green huge">&#9654; PLAY</button>
+        <button id="dressup-btn" class="btn yellow big">&#129485; Dress Up</button>
+        <div id="menu-actions">
+          <button id="howto-btn" class="btn blue small">&#127918; How to Play</button>
+          <button id="settings-btn" class="btn yellow small">&#9881; Settings</button>
+        </div>
+        <div id="daynight-select" title="One full day passes every six real minutes — these buttons jump the clock">
+          <button id="dn-day" class="dn-btn selected">&#9728; Daytime</button>
+          <button id="dn-night" class="dn-btn">&#127769; Nighttime</button>
+        </div>
+        <div id="guide">
+          <div class="card"><div class="emoji">&#127983;</div><div class="card-title">Swing!</div><div>Hold <b>SPACE</b> or the big red button to fire a tether.</div></div>
+          <div class="card"><div class="emoji">&#128377;</div><div class="card-title">Crawl!</div><div>Walk into any building to climb it. <b>SPACE</b> leaps off!</div></div>
+          <div class="card"><div class="emoji">&#127923;</div><div class="card-title">Steer</div><div>Use <b>WASD</b> / <b>arrows</b> or the steering ball.</div></div>
+          <div class="card"><div class="emoji">&#9889;</div><div class="card-title">Boost</div><div>Hold <b>SHIFT</b> to zoom and glide.</div></div>
+          <div class="card"><div class="emoji">&#128737;</div><div class="card-title">Hero HQ!</div><div>Stand on the base roof and press <b>E</b> to enter your high-tech HQ — lab, music, painting & garage!</div></div>
+          <div class="card"><div class="emoji">&#128046;</div><div class="card-title">Zoo!</div><div>Visit the animals, climb the City Hall dome, explore the Art Museum — press <b>E</b> at every door!</div></div>
+          <div class="card"><div class="emoji">&#127891;</div><div class="card-title">Heroes</div><div>Pick Spidey, Spin, Ghosty or Blackcat in <b>Dress Up</b> — every hero has their own costume wardrobe!</div></div>
+          <div class="card"><div class="emoji">&#128173;</div><div class="card-title">Help</div><div>Follow the mission list and the little city map. Press <b>R</b> to pop back to a safe spot.</div></div>
+        </div>
+        <p id="menu-foot">&#127937; 40 missions &bull; &#128046; zoo &bull; &#127963; city hall &bull; &#127912; art museum &bull; &#128664; drive the city &bull; &#127983; 4 heroes &bull; 3 HQ minigames!<br><span id="asset-credit">3D characters: Quaternius &bull; traffic: Kenney &bull; animals: Gobkit (CC0 1.0)</span></p>
+      </div>
+    </div>
+
+    <!-- ============ Settings ============ -->
+    <div id="settings" class="overlay hidden">
+      <div class="panel settings-panel">
+        <h2>&#9881; Settings</h2>
+
+        <div class="settings-group">
+          <div class="settings-title">&#127925; Audio</div>
+          <div class="setting-row">
+            <label for="music-vol">Music</label>
+            <input id="music-vol" type="range" min="0" max="100" step="1" value="70" aria-label="Music volume" />
+            <span id="music-vol-label" class="setting-value">70%</span>
+          </div>
+          <div class="setting-row">
+            <label for="sfx-vol">Effects</label>
+            <input id="sfx-vol" type="range" min="0" max="100" step="1" value="90" aria-label="Sound effects volume" />
+            <span id="sfx-vol-label" class="setting-value">90%</span>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Sound</span>
+            <button id="settings-mute-btn" class="toggle-btn" aria-label="Toggle all sound">&#128266; Sound on</button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-title">&#127918; Graphics <span id="perf-status" class="perf-status">Balanced preset</span></div>
+          <div class="setting-row">
+            <span class="setting-label">Preset</span>
+            <div class="seg" role="group" aria-label="Performance preset">
+              <button class="dn-btn" data-perf-preset="fast">Fast</button>
+              <button class="dn-btn selected" data-perf-preset="balanced">Balanced</button>
+              <button class="dn-btn" data-perf-preset="sharp">Sharp</button>
+              <button class="dn-btn touch-only" data-perf-preset="phone">Phone</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Sun shadows</span>
+            <button class="toggle-btn" data-perf-key="shadows" data-perf-label="Sun shadows" aria-pressed="true">On</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Ambient occlusion</span>
+            <button class="toggle-btn" data-perf-key="ao" data-perf-label="Ambient occlusion" aria-pressed="false">Off</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Screen reflections <em>(slow)</em></span>
+            <button class="toggle-btn" data-perf-key="ssr" data-perf-label="Screen reflections" aria-pressed="false">Off</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Bloom glow</span>
+            <button class="toggle-btn" data-perf-key="bloom" data-perf-label="Bloom glow" aria-pressed="true">On</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Water mirror</span>
+            <button class="toggle-btn" data-perf-key="waterReflections" data-perf-label="Water mirror" aria-pressed="true">On</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Glass UI blur</span>
+            <button class="toggle-btn" data-perf-key="uiBlur" data-perf-label="Glass UI blur" aria-pressed="false">Off</button>
+          </div>
+          <div class="setting-row">
+            <label for="render-scale">Picture detail</label>
+            <input id="render-scale" type="range" min="50" max="125" step="5" value="85" aria-label="Render scale" />
+            <span id="render-scale-label" class="setting-value">85%</span>
+          </div>
+          <div class="setting-hint">Lower picture detail first if the game stutters. Screen reflections are the most expensive pass. Press <b>G</b> for live FPS and draw-call stats.</div>
+          <div class="setting-row">
+            <label for="crowd-density">Crowd</label>
+            <input id="crowd-density" type="range" min="50" max="200" step="25" value="200" aria-label="Crowd density" />
+            <span id="crowd-density-label" class="setting-value">200%</span>
+          </div>
+          <div class="setting-hint">More people makes the city busier; lower it if the game slows down.</div>
+          <div class="setting-row">
+            <span class="setting-label">Performance panel</span>
+            <button id="perf-hud-btn" class="toggle-btn" aria-pressed="false">Off (G)</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Setup screen on startup</span>
+            <button id="boot-screen-btn" class="toggle-btn" aria-pressed="true">On</button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-title">&#9855; Accessibility</div>
+          <div class="setting-row">
+            <span class="setting-label">Reduce motion</span>
+            <button id="reduce-motion-btn" class="toggle-btn" aria-pressed="false">Off</button>
+          </div>
+          <div class="setting-hint">Turns off confetti and extra UI animations.</div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-title">&#128187; Display</div>
+          <div class="setting-row">
+            <span class="setting-label">Fullscreen</span>
+            <button id="settings-fullscreen" class="toggle-btn">&#9974; Toggle</button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">Touch controls</span>
+            <div class="seg" role="group" aria-label="Touch controls">
+              <button class="dn-btn selected" data-touch-mode="auto">Auto</button>
+              <button class="dn-btn" data-touch-mode="on">On</button>
+              <button class="dn-btn" data-touch-mode="off">Off</button>
+            </div>
+          </div>
+          <div class="setting-hint">Auto shows the on-screen stick and buttons on phones and tablets, and keeps the desktop HUD on a mouse-and-keyboard computer.</div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-title">&#128190; Adventure</div>
+          <div class="setting-row">
+            <span class="setting-label">Saved progress</span>
+            <button id="reset-progress-btn" class="toggle-btn danger">Reset Progress</button>
+          </div>
+          <div class="setting-hint">Missions and quests are saved automatically.</div>
+        </div>
+
+        <button id="settings-close" class="btn green">&#10004; Done</button>
+      </div>
+    </div>
+
+    <!-- ============ How to play ============ -->
+    <div id="howto" class="overlay hidden">
+      <div class="panel howto-panel">
+        <h2>&#127918; How to Play</h2>
+        <div class="howto-grid">
+          <div class="howto-card"><b>&#127983; Swing</b><span>Hold <kbd>SPACE</kbd> / <kbd>A</kbd> / <kbd>RT</kbd>, or the big red touch button.</span></div>
+          <div class="howto-card"><b>&#127923; Move</b><span><kbd>WASD</kbd> / arrows, left stick, or the steering ball.</span></div>
+          <div class="howto-card"><b>&#9889; Boost</b><span>Hold <kbd>SHIFT</kbd> / <kbd>X</kbd> / <kbd>LT</kbd> to zoom and glide.</span></div>
+          <div class="howto-card"><b>&#128377; Climb</b><span>Walk into a building to crawl up it. Press swing to leap off.</span></div>
+          <div class="howto-card"><b>&#128421; Interact</b><span>Press <kbd>E</kbd> / <kbd>B</kbd> at glowing doors, stations and friends.</span></div>
+          <div class="howto-card"><b>&#128260; Camera</b><span>Mouse wheel, pinch, or <kbd>LB</kbd> / <kbd>RB</kbd> to zoom.</span></div>
+          <div class="howto-card"><b>&#127968; Safe spot</b><span>Press <kbd>R</kbd> / <kbd>Y</kbd> to fly back to a friendly rooftop.</span></div>
+          <div class="howto-card"><b>&#9208; Pause</b><span><kbd>ESC</kbd> / <kbd>P</kbd> / <kbd>START</kbd>. <kbd>H</kbd> opens this help.</span></div>
+        </div>
+        <p class="tip">Keyboard, gamepad or touch — pick whatever feels best! Press <kbd>F</kbd> for fullscreen.</p>
+        <button id="howto-close" class="btn green">&#128077; Got it!</button>
+      </div>
+    </div>
+
+    <div id="confetti"></div>
+  </div>
+
+  <!-- Soft black fade used for interior transition rides -->
+  <div id="fade"></div>
+
+</body>
+</html>

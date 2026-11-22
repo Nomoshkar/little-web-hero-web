@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "generated": "2026-10-30",
+  "title": "Little Web Hero — original character cast",
+  "note": "All character and animation source assets are CC0 1.0. Runtime variants, suit shells, emblems, masks and palettes are original procedural additions.",
+  "sources": [
+    {
+      "name": "Universal Base Characters (Standard, free)",
+      "author": "Quaternius",
+      "url": "https://quaternius.com/packs/universalbasecharacters.html",
+      "mirror": "https://quaternius.itch.io/universal-base-characters",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloaded": "2026-10-30"
+    },
+    {
+      "name": "Universal Animation Library (Standard, free)",
+      "author": "Quaternius",
+      "url": "https://quaternius.com/packs/universalanimationlibrary.html",
+      "mirror": "https://quaternius.itch.io/universal-animation-library",
+      "license": "CC0 1.0 Universal",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "downloaded": "2026-10-30"
+    }
+  ],
+  "clips": [
+    "Idle_Loop",
+    "Idle_Talking_Loop",
+    "Walk_Loop",
+    "Jog_Fwd_Loop",
+    "Sprint_Loop",
+    "Jump_Start",
+    "Jump_Loop",
+    "Jump_Land",
+    "Punch_Cross",
+    "Punch_Jab",
+    "Hit_Chest",
+    "Death01",
+    "Crouch_Idle_Loop",
+    "Crouch_Fwd_Loop",
+    "Roll"
+  ],
+  "files": [
+    {
+      "path": "assets/characters/Superhero_Male_FullBody.glb",
+      "kind": "base-character",
+      "bytes": 3631464,
+      "sha256": "25443a2c2241bacca2f64a3640bb4712ef15c0635ad78cc3a254e775ff032594"
+    },
+    {
+      "path": "assets/characters/Superhero_Female_FullBody.glb",
+      "kind": "base-character",
+      "bytes": 3505132,
+      "sha256": "63245b8411fab3923123aa32d1b5406f43761ee4aba1c7f1d044cc2e9e6935ee"
+    },
+    {
+      "path": "assets/characters/Hair_Long.glb",
+      "kind": "hairstyle",
+      "bytes": 117204,
+      "sha256": "7c8996f567d60587211db2f157a61165781eecf8e01cce8bfe9df77535c0def1"
+    },
+    {
+      "path": "assets/characters/Hair_Buns.glb",
+      "kind": "hairstyle",
+      "bytes": 133112,
+      "sha256": "53a3387eb3e9d8d4b4d51710e8a834fcaa868379538d5448f34f244261445f59"
+    },
+    {
+      "path": "assets/characters/Hair_SimpleParted.glb",
+      "kind": "hairstyle",
+      "bytes": 33228,
+      "sha256": "e5f3e4fd2ed4056233bd54ee33bc0809b5274f8ca8d18bc36d9c496224963e99"
+    },
+    {
+      "path": "assets/characters/Hair_Buzzed.glb",
+      "kind": "hairstyle",
+      "bytes": 21092,
+      "sha256": "0749438a3641c67cefce2033d1f09e2191fb855f14f2c436b1c899f141f14de4"
+    },
+    {
+      "path": "assets/characters/Locomotion.glb",
+      "kind": "animation-subset",
+      "bytes": 2604708,
+      "sha256": "1abe7346d9bec1457443bc550f550f0cc2ac90d60187d0dee13c886db5344a6a"
+    },
+    {
+      "path": "assets/characters/licenses/UniversalBaseCharacters-License.txt",
+      "kind": "license",
+      "bytes": 806
+    },
+    {
+      "path": "assets/characters/licenses/UniversalAnimationLibrary-License.txt",
+      "kind": "license",
+      "bytes": 332
+    }
+  ]
+}

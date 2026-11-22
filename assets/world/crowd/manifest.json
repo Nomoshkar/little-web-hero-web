@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "generated": "2026-11-20",
+  "title": "Little Web Hero — near-field crowd kit",
+  "note": "CC0 Quaternius civilian bases via Poly Pizza. Materials are baked to a per-vertex palette slot attribute (_PARTID) and a single neutral material, so each actor is one draw call and can be recoloured at runtime.",
+  "bases": [
+    {
+      "id": "man",
+      "file": "assets/world/crowd/man.glb",
+      "hiFile": "assets/world/crowd/man-hi.glb",
+      "height": 1.9,
+      "build": "male",
+      "tris": 1216,
+      "attribution": "\"Man\" by Quaternius, https://poly.pizza/m/HMnuH5geEG, CC0 1.0"
+    },
+    {
+      "id": "woman-casual",
+      "file": "assets/world/crowd/woman-casual.glb",
+      "hiFile": "assets/world/crowd/woman-casual-hi.glb",
+      "height": 1.75,
+      "build": "female",
+      "tris": 2776,
+      "attribution": "\"Woman Casual\" by Quaternius, https://poly.pizza/m/jpKRgGDxhk, CC0 1.0"
+    },
+    {
+      "id": "woman-dress",
+      "file": "assets/world/crowd/woman-dress.glb",
+      "hiFile": "assets/world/crowd/woman-dress-hi.glb",
+      "height": 1.75,
+      "build": "female",
+      "tris": 1786,
+      "attribution": "\"Woman in Dress\" by Quaternius, https://poly.pizza/m/zMyPlQXBzq, CC0 1.0"
+    }
+  ],
+  "clips": ["Idle", "Standing", "Walk", "Run", "Sitting", "Clapping", "Jump", "Lay", "Swim", "Dance", "Kneel", "SitGround"],
+  "parts": {
+    "skin": 0,
+    "top": 1,
+    "bottom": 2,
+    "eye_white": 3,
+    "shoes": 4,
+    "hair": 5,
+    "iris": 6,
+    "pupil": 7,
+    "glint": 8
+  },
+  "credits": "Crowd characters by Quaternius (CC0 1.0), via Poly Pizza. See CREDITS.md for per-file attribution."
+}
