@@ -2,21 +2,19 @@
 
 Traffic vehicles and zoo animals in this folder are repacked from the
 **Kenney Car Kit** and **Gobkit Animal Packs**, both released under
-**CC0 1.0 Universal (public domain)**. The **Kenney Mini Characters 1**
-pack is retained for reference / optional GLB loading; the city crowd now
-uses the procedural instanced rig plus the Quaternius near-field kit in
-`crowd/`. No attribution is required, but we are happy to credit the authors.
+**CC0 1.0 Universal (public domain)**. The city crowd uses the procedural
+instanced rig plus the Quaternius near-field kit in `crowd/`; the unused
+legacy Mini Characters GLBs were removed in the 2026-11-24 cleanup.
+No attribution is required, but we are happy to credit the authors.
 
 - Car Kit — models by **Kenney** — https://kenney.nl/assets/car-kit
-- Mini Characters 1 — models by **Kenney** — https://kenney.nl/assets/mini-characters-1
 - Near-field crowd (Man / Woman Casual / Woman in Dress) — models by
   **Quaternius**, via [Poly Pizza](https://poly.pizza) — CC0 1.0; see
   `crowd/CREDITS.md`
 - Animal packs (Elephant, Lion, Zebra, Tiger, Seal, Penguin, Flamingo,
   Peacock) — models by **Gobkit** — https://gobkit.com/freebies
 
-License texts: `licenses/KenneyCarKit-License.txt`,
-`licenses/KenneyMiniCharacters-License.txt` and
+License texts: `licenses/KenneyCarKit-License.txt` and
 `licenses/GobkitAnimals-License.txt`.
 
 The build script bakes each Kenney pack's colour map into vertex colours,
