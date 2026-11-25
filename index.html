@@ -13,11 +13,11 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd23f' stroke='%23e8a013' stroke-width='1' d='M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-BAd2viI9.js"></script>
+  <script type="module" crossorigin src="./assets/index-DuSXt5ig.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/three-MMYrSsSU.js">
-  <link rel="modulepreload" crossorigin href="./assets/reef-BvWlZVaK.js">
-  <link rel="modulepreload" crossorigin href="./assets/vehicle-BPYYA-4_.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-CEE54QPG.css">
+  <link rel="modulepreload" crossorigin href="./assets/reef-Ibvw_fnk.js">
+  <link rel="modulepreload" crossorigin href="./assets/vehicle-DHAx5yPW.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-C-R_c4NU.css">
 </head>
 <body>
   <!-- ============ Pre-boot performance setup ============ -->
@@ -134,15 +134,15 @@
     <!-- ============ HUD (during play) ============ -->
     <div id="hud" class="hidden">
       <div id="chips">
-        <div class="chip star" id="star-chip"><span class="icon">&#11088;</span><span id="star-count">0</span></div>
-        <div class="chip ring" id="ring-chip"><span class="icon">&#128171;</span><span id="ring-count">0/8</span></div>
-        <div class="chip mission" id="mission-chip"><span class="icon">&#127942;</span><span id="mission-count">0/40</span></div>
-        <div class="chip lap" id="lap-chip"><span class="icon">&#127936;</span><span id="lap-count">0</span></div>
+        <div class="chip star" id="star-chip" title="Stars collected" aria-label="Stars collected"><span class="icon">&#11088;</span><span id="star-count">0</span></div>
+        <div class="chip ring" id="ring-chip" title="Rings this lap" aria-label="Rings this lap"><span class="icon">&#128171;</span><span id="ring-count">0/8</span></div>
+        <div class="chip mission" id="mission-chip" title="Missions complete" aria-label="Missions complete"><span class="icon">&#127942;</span><span id="mission-count">0/40</span></div>
+        <div class="chip lap" id="lap-chip" title="Ring laps complete" aria-label="Ring laps complete"><span class="icon">&#127936;</span><span id="lap-count">0</span></div>
       </div>
-      <div id="objective" class="pill">&#128073; <span id="objective-text">Collect sparkling stars!</span></div>
+      <div id="objective" class="pill" aria-live="polite">&#128073; <span id="objective-text">Collect sparkling stars!</span></div>
       <div id="quests" class="hidden"></div>
       <div id="mission-tracker">
-        <div id="mission-tracker-head"><span>&#127919; Missions</span><span id="mission-progress">0/40</span></div>
+        <div id="mission-tracker-head"><span>&#127919; Missions</span><span id="mission-progress" aria-live="polite">0/40</span><button id="mission-toggle" type="button" class="mt-toggle" aria-label="Collapse mission list" aria-expanded="true" title="Collapse mission list">&#9662;</button></div>
         <div id="mission-list"></div>
       </div>
       <div id="minimap-wrap">
@@ -162,12 +162,16 @@
       <!-- Dive instruments replace the city tracker while the hero is in the reef. -->
       <div id="reef-hud" class="hidden" aria-live="off">
         <div class="reef-instrument reef-depth"><span>DEPTH</span><b id="reef-depth">0 m</b></div>
-        <div class="reef-instrument reef-air"><span>AIR</span><div class="reef-meter"><i id="reef-air-fill"></i></div><b id="reef-air-value">100%</b></div>
+        <div class="reef-instrument reef-air" id="reef-air">
+          <span>AIR</span><div class="reef-meter"><i id="reef-air-fill"></i></div><b id="reef-air-value">100%</b>
+          <div class="reef-boost-line"><span>BOOST</span><div class="reef-meter"><i id="reef-boost-fill"></i></div></div>
+        </div>
         <div class="reef-instrument reef-objective" id="reef-objective">Explore the coral garden</div>
         <div class="reef-instrument reef-stats">
           <span title="Pearls">&#128171; <b id="reef-pearls">0/30</b></span>
           <span title="Treasure chests">&#128230; <b id="reef-chests">0/5</b></span>
           <span title="Reef cleanup">&#9851; <b id="reef-cleanup">0/20</b></span>
+          <span title="Ring trial">&#9201; <b id="reef-rings">0/8</b></span>
         </div>
         <div class="reef-actions" role="group" aria-label="Dive tools">
           <button type="button" data-reef-action="sonar" title="Ping nearby treasure">&#128225; Sonar</button>
@@ -199,7 +203,7 @@
     </div>
 
     <!-- ============ Big celebration banner ============ -->
-    <div id="banner" class="hidden">
+    <div id="banner" class="hidden" role="status" aria-live="polite" aria-atomic="true">
       <div id="banner-main"></div>
       <div id="banner-sub"></div>
     </div>
@@ -212,14 +216,14 @@
       <div id="dressup-panel">
         <div class="du-col du-col-hero">
           <h2>&#129485; Dress Up Your Hero!</h2>
-          <div id="characters"></div>
-          <div id="costume-name">Spidey Classic</div>
+          <div id="characters" role="group" aria-label="Choose a hero"></div>
+          <div id="costume-name" aria-live="polite">Spidey Classic</div>
         </div>
         <div class="du-col du-col-picks">
           <div class="du-label">Costume</div>
-          <div id="swatches"></div>
+          <div id="swatches" role="group" aria-label="Costumes"></div>
           <div class="du-label">Emblem</div>
-          <div id="emblems"></div>
+          <div id="emblems" role="group" aria-label="Emblems"></div>
         </div>
         <div class="du-col du-col-actions">
           <button id="cape-btn" class="btn yellow small">Cape: On</button>
@@ -242,30 +246,35 @@
     </div>
 
     <!-- ============ Reef journal / photo mode ============ -->
-    <div id="reef-journal" class="overlay hidden">
+    <div id="reef-journal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="reef-journal-title">
       <div class="panel reef-journal-panel">
-        <div id="reef-journal-head"><h2>&#128032; Reef Journal</h2><button id="reef-journal-close" class="btn blue small">&#10006; Close</button></div>
+        <div id="reef-journal-head"><h2 id="reef-journal-title">&#128032; Reef Journal</h2><button id="reef-journal-close" class="btn blue small">&#10006; Close</button></div>
         <p id="reef-journal-summary" class="tip">Discover the reef's fish, habitats and treasures.</p>
         <div id="reef-journal-list"></div>
       </div>
     </div>
     <div id="photo-hud" class="hidden">
       <div class="photo-frame"></div>
-      <div class="photo-help">Drag to orbit &middot; scroll to zoom &middot; <kbd>C</kbd> or Photo to return</div>
+      <div class="photo-help" id="photo-help">Drag to orbit &middot; scroll to zoom &middot; <kbd>C</kbd> or Photo to return</div>
       <button id="photo-capture" class="btn yellow small">&#128247; Capture</button>
       <button id="photo-exit" class="btn blue small">&#10006; Exit photo mode</button>
     </div>
 
     <!-- ============ Pause menu ============ -->
-    <div id="pause-menu" class="overlay hidden">
+    <div id="pause-menu" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title">
       <div class="panel">
-        <h2>&#9208; Paused</h2>
+        <h2 id="pause-title">&#9208; Paused</h2>
         <p class="tip">Tip: hold <b>SPACE</b> / <b>SWING</b> to fly — walk into any wall to climb it!</p>
         <div id="pause-stats">&#11088; 0 stars &bull; &#127941; 0/40 missions</div>
         <button id="resume-btn" class="btn green">&#9654; Keep Playing</button>
         <div class="panel-row">
           <button id="howto-btn-pause" class="btn blue small">&#127918; How to Play</button>
           <button id="settings-btn-pause" class="btn yellow small">&#9881; Settings</button>
+        </div>
+        <div id="travel-row" class="panel-row hidden" role="group" aria-label="Quick travel">
+          <button class="btn blue small" data-travel="hq" title="Travel to the Hero HQ roof">&#127961; HQ</button>
+          <button class="btn blue small" data-travel="lighthouse" title="Travel to the lighthouse jetty">&#127965; Lighthouse</button>
+          <button class="btn blue small" data-travel="park" title="Travel to the park">&#127795; Park</button>
         </div>
         <button id="restart-btn" class="btn yellow">&#8635; Restart</button>
         <button id="menu-btn" class="btn blue">&#127968; Main Menu</button>
@@ -307,9 +316,9 @@
     </div>
 
     <!-- ============ Settings ============ -->
-    <div id="settings" class="overlay hidden">
+    <div id="settings" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
       <div class="panel settings-panel">
-        <h2>&#9881; Settings</h2>
+        <h2 id="settings-title">&#9881; Settings</h2>
 
         <div class="settings-group">
           <div class="settings-title">&#127925; Audio</div>
@@ -427,22 +436,23 @@
     </div>
 
     <!-- ============ How to play ============ -->
-    <div id="howto" class="overlay hidden">
+    <div id="howto" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="howto-title">
       <div class="panel howto-panel">
-        <h2>&#127918; How to Play</h2>
+        <h2 id="howto-title">&#127918; How to Play</h2>
         <div class="howto-grid">
           <div class="howto-card"><b>&#127983; Swing</b><span>Hold <kbd>SPACE</kbd> / <kbd>A</kbd> / <kbd>RT</kbd>, or the big red touch button.</span></div>
           <div class="howto-card"><b>&#127923; Move</b><span><kbd>WASD</kbd> / arrows, left stick, or the steering ball.</span></div>
           <div class="howto-card"><b>&#9889; Boost</b><span>Hold <kbd>SHIFT</kbd> / <kbd>X</kbd> / <kbd>LT</kbd> to zoom and glide.</span></div>
           <div class="howto-card"><b>&#128377; Climb</b><span>Walk into a building to crawl up it. Press swing to leap off.</span></div>
           <div class="howto-card"><b>&#128421; Interact</b><span>Press <kbd>E</kbd> / <kbd>B</kbd> at glowing doors, stations and friends.</span></div>
-          <div class="howto-card"><b>&#128260; Camera</b><span>Mouse wheel, pinch, or <kbd>LB</kbd> / <kbd>RB</kbd> to zoom.</span></div>
+          <div class="howto-card"><b>&#128260; Camera</b><span>Mouse wheel, pinch, <kbd>[</kbd> / <kbd>]</kbd>, or <kbd>LB</kbd> / <kbd>RB</kbd> to zoom.</span></div>
           <div class="howto-card"><b>&#128663; Drive</b><span><kbd>W/S</kbd> throttle and brake, <kbd>A/D</kbd> steer, <kbd>SHIFT</kbd> boost, <kbd>SPACE</kbd> handbrake, <kbd>E</kbd> park.</span></div>
           <div class="howto-card"><b>&#129327; Dive</b><span><kbd>WASD</kbd> swim, <kbd>SPACE</kbd> rise, <kbd>SHIFT</kbd> dive. Use Sonar, Lamp, Journal, Map and Photo tools.</span></div>
           <div class="howto-card"><b>&#127968; Safe spot</b><span>Press <kbd>R</kbd> / <kbd>Y</kbd> to fly back to a friendly rooftop or your dive entry.</span></div>
           <div class="howto-card"><b>&#9208; Pause</b><span><kbd>ESC</kbd> / <kbd>P</kbd> / <kbd>START</kbd>. <kbd>H</kbd> opens this help.</span></div>
+          <div class="howto-card"><b>&#9889; Extras</b><span><kbd>M</kbd> mute, <kbd>N</kbd> day/night, <kbd>[</kbd>/<kbd>]</kbd> zoom. Pause &#8594; quick travel.</span></div>
         </div>
-        <p class="tip">Keyboard, gamepad or touch — pick whatever feels best! Press <kbd>F</kbd> for fullscreen.</p>
+        <p class="tip">Keyboard, gamepad or touch — pick whatever feels best! Press <kbd>F</kbd> for fullscreen, <kbd>M</kbd> to mute, or <kbd>N</kbd> for day/night.</p>
         <button id="howto-close" class="btn green">&#128077; Got it!</button>
       </div>
     </div>
