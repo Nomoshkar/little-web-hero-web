@@ -13,11 +13,11 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd23f' stroke='%23e8a013' stroke-width='1' d='M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-DuSXt5ig.js"></script>
+  <script type="module" crossorigin src="./assets/index-DC0wGxEW.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/three-MMYrSsSU.js">
-  <link rel="modulepreload" crossorigin href="./assets/reef-Ibvw_fnk.js">
-  <link rel="modulepreload" crossorigin href="./assets/vehicle-DHAx5yPW.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-C-R_c4NU.css">
+  <link rel="modulepreload" crossorigin href="./assets/reef-D_djpZEZ.js">
+  <link rel="modulepreload" crossorigin href="./assets/vehicle-BlSk2-1w.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-CaMcVTj4.css">
 </head>
 <body>
   <!-- ============ Pre-boot performance setup ============ -->
@@ -138,6 +138,7 @@
         <div class="chip ring" id="ring-chip" title="Rings this lap" aria-label="Rings this lap"><span class="icon">&#128171;</span><span id="ring-count">0/8</span></div>
         <div class="chip mission" id="mission-chip" title="Missions complete" aria-label="Missions complete"><span class="icon">&#127942;</span><span id="mission-count">0/40</span></div>
         <div class="chip lap" id="lap-chip" title="Ring laps complete" aria-label="Ring laps complete"><span class="icon">&#127936;</span><span id="lap-count">0</span></div>
+        <button class="chip passport" id="passport-chip" type="button" title="Harbor Passport (B)" aria-label="Open Harbor Passport" aria-haspopup="dialog" aria-expanded="false"><span class="icon">&#128194;</span><span id="passport-count">0/17</span></button>
       </div>
       <div id="objective" class="pill" aria-live="polite">&#128073; <span id="objective-text">Collect sparkling stars!</span></div>
       <div id="quests" class="hidden"></div>
@@ -190,6 +191,13 @@
         <div class="drive-gear" id="drive-gear">N</div>
         <div class="drive-boost"><span>BOOST</span><div class="reef-meter"><i id="drive-boost-fill"></i></div></div>
         <div class="drive-help" id="drive-help">W/S throttle &middot; A/D steer &middot; SHIFT boost &middot; SPACE drift &middot; E park</div>
+      </div>
+
+      <!-- Compact transit / flight board, shown near stations, gates and piers. -->
+      <div id="transit-hud" class="hidden" role="status" aria-live="off" aria-label="Transit and flight status">
+        <div id="transit-title"></div>
+        <div id="transit-line"></div>
+        <div id="transit-detail"></div>
       </div>
 
       <!-- Touch controls live inside the HUD so the menu / dress-up screen
@@ -268,16 +276,40 @@
         <div id="pause-stats">&#11088; 0 stars &bull; &#127941; 0/40 missions</div>
         <button id="resume-btn" class="btn green">&#9654; Keep Playing</button>
         <div class="panel-row">
+          <button id="passport-btn-pause" class="btn yellow small" aria-label="Open Harbor Passport" aria-haspopup="dialog" aria-expanded="false">&#128194; Passport</button>
           <button id="howto-btn-pause" class="btn blue small">&#127918; How to Play</button>
           <button id="settings-btn-pause" class="btn yellow small">&#9881; Settings</button>
         </div>
         <div id="travel-row" class="panel-row hidden" role="group" aria-label="Quick travel">
-          <button class="btn blue small" data-travel="hq" title="Travel to the Hero HQ roof">&#127961; HQ</button>
-          <button class="btn blue small" data-travel="lighthouse" title="Travel to the lighthouse jetty">&#127965; Lighthouse</button>
-          <button class="btn blue small" data-travel="park" title="Travel to the park">&#127795; Park</button>
+          <button class="btn blue small" data-travel="hq" aria-label="Quick travel to the Hero HQ roof" title="Travel to the Hero HQ roof">&#127961; HQ</button>
+          <button class="btn blue small" data-travel="lighthouse" aria-label="Quick travel to the lighthouse jetty" title="Travel to the lighthouse jetty">&#127965; Lighthouse</button>
+          <button class="btn blue small" data-travel="park" aria-label="Quick travel to the park" title="Travel to the park">&#127795; Park</button>
+          <button class="btn blue small" data-travel="skyport" aria-label="Quick travel to the Skyport terminal" title="Travel to the Skyport terminal">&#9992; Skyport</button>
+          <button class="btn blue small" data-travel="east-landing" aria-label="Quick travel to the East Island ferry landing" title="Travel to the East Island ferry landing">&#9875; East Landing</button>
+          <button class="btn blue small" data-travel="coney-pier" aria-label="Quick travel to Coney Pier" title="Travel to Coney Pier">&#127917; Coney Pier</button>
+          <button class="btn blue small" data-travel="harbor-plaza" aria-label="Quick travel to Harbor Plaza" title="Travel to Harbor Plaza on East Island">&#127963; Harbor Plaza</button>
         </div>
         <button id="restart-btn" class="btn yellow">&#8635; Restart</button>
         <button id="menu-btn" class="btn blue">&#127968; Main Menu</button>
+      </div>
+    </div>
+
+    <!-- ============ Harbor Passport ============ -->
+    <div id="passport" class="overlay passport hidden" role="dialog" aria-modal="true" aria-labelledby="passport-title" aria-describedby="passport-summary">
+      <div class="panel passport-panel">
+        <div id="passport-head">
+          <div>
+            <h2 id="passport-title">&#128194; Harbor Passport</h2>
+            <p id="passport-summary" class="tip" aria-live="polite">Explore the harbour and collect every stamp!</p>
+          </div>
+          <button id="passport-close" class="btn blue small" type="button" aria-label="Close Harbor Passport">&#10006; Close</button>
+        </div>
+        <div id="passport-progress" role="progressbar" aria-valuemin="0" aria-valuemax="17" aria-valuenow="0" aria-label="Passport progress">
+          <i id="passport-progress-fill"></i>
+        </div>
+        <p id="passport-reward" class="tip">Every first stamp gives <b>+1 &#11088;</b>. Finish the book for a special badge!</p>
+        <div id="passport-badge" class="hidden" role="status">&#127941; Master Explorer — every harbour stamp collected!</div>
+        <div id="passport-list" role="list" aria-label="Discovery entries"></div>
       </div>
     </div>
 
@@ -290,6 +322,7 @@
           <div class="pstat"><b id="p-missions">0/40</b><span>Missions</span></div>
           <div class="pstat"><b id="p-stars">0</b><span>Best stars</span></div>
           <div class="pstat"><b id="p-time">0m</b><span>Play time</span></div>
+          <div class="pstat"><b id="p-passport">0/17</b><span>Passport</span></div>
         </div>
         <button id="play-btn" class="btn green huge">&#9654; PLAY</button>
         <button id="dressup-btn" class="btn yellow big">&#129485; Dress Up</button>
@@ -450,7 +483,7 @@
           <div class="howto-card"><b>&#129327; Dive</b><span><kbd>WASD</kbd> swim, <kbd>SPACE</kbd> rise, <kbd>SHIFT</kbd> dive. Use Sonar, Lamp, Journal, Map and Photo tools.</span></div>
           <div class="howto-card"><b>&#127968; Safe spot</b><span>Press <kbd>R</kbd> / <kbd>Y</kbd> to fly back to a friendly rooftop or your dive entry.</span></div>
           <div class="howto-card"><b>&#9208; Pause</b><span><kbd>ESC</kbd> / <kbd>P</kbd> / <kbd>START</kbd>. <kbd>H</kbd> opens this help.</span></div>
-          <div class="howto-card"><b>&#9889; Extras</b><span><kbd>M</kbd> mute, <kbd>N</kbd> day/night, <kbd>[</kbd>/<kbd>]</kbd> zoom. Pause &#8594; quick travel.</span></div>
+          <div class="howto-card"><b>&#9889; Extras</b><span><kbd>M</kbd> mute, <kbd>N</kbd> day/night, <kbd>B</kbd> Harbor Passport. Pause &#8594; quick travel.</span></div>
         </div>
         <p class="tip">Keyboard, gamepad or touch — pick whatever feels best! Press <kbd>F</kbd> for fullscreen, <kbd>M</kbd> to mute, or <kbd>N</kbd> for day/night.</p>
         <button id="howto-close" class="btn green">&#128077; Got it!</button>
@@ -458,6 +491,7 @@
     </div>
 
     <div id="confetti"></div>
+    <div id="a11y-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <!-- Soft black fade used for interior transition rides -->
