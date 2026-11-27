@@ -11,13 +11,20 @@
   <meta name="format-detection" content="telephone=no" />
   <title>Little Web Hero</title>
   <link rel="manifest" href="manifest.webmanifest" />
+  <!-- Start the biggest character downloads during module evaluation. The
+       loader awaits these GLBs; preloading overlaps their network time with
+       the procedural city build instead of starting after it. Relative paths
+       keep the build portable under the GitHub Pages mirror. -->
+  <link rel="preload" href="assets/characters/Superhero_Male_FullBody.glb" as="fetch" crossorigin />
+  <link rel="preload" href="assets/characters/Superhero_Female_FullBody.glb" as="fetch" crossorigin />
+  <link rel="preload" href="assets/characters/Locomotion.glb" as="fetch" crossorigin />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd23f' stroke='%23e8a013' stroke-width='1' d='M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-DC0wGxEW.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/three-MMYrSsSU.js">
-  <link rel="modulepreload" crossorigin href="./assets/reef-D_djpZEZ.js">
-  <link rel="modulepreload" crossorigin href="./assets/vehicle-BlSk2-1w.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-CaMcVTj4.css">
+  <script type="module" crossorigin src="./assets/index-Du2jFvW4.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/three-Cuf80kz2.js">
+  <link rel="modulepreload" crossorigin href="./assets/reef-AXTY3FMu.js">
+  <link rel="modulepreload" crossorigin href="./assets/vehicle-BgyKZknd.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-Bs0U6XcF.css">
 </head>
 <body>
   <!-- ============ Pre-boot performance setup ============ -->
@@ -48,6 +55,11 @@
           <span class="bp-icon">&#128302;</span>
           <span class="bp-name">Sharp</span>
           <span class="bp-blurb">Extra detail</span>
+        </button>
+        <button class="boot-preset" data-boot-preset="ultra">
+          <span class="bp-icon">&#128640;</span>
+          <span class="bp-name">Ultra</span>
+          <span class="bp-blurb">Powerful GPUs</span>
         </button>
         <button class="boot-preset touch-only" data-boot-preset="phone">
           <span class="bp-icon">&#128241;</span>
@@ -96,7 +108,7 @@
         </div>
         <div class="boot-slider">
           <label for="boot-crowd">Crowd</label>
-          <input id="boot-crowd" type="range" min="50" max="200" step="25" value="100" />
+          <input id="boot-crowd" type="range" min="50" max="200" step="5" value="100" />
           <span id="boot-crowd-label" class="boot-value">100%</span>
         </div>
         <div class="boot-pixels-line">Rendering at about <b id="boot-pixels">—</b> pixels</div>
@@ -115,6 +127,16 @@
   <!-- The 3D canvas is appended here by src/main.js -->
 
   <!-- ============ Startup loading screen ============ -->
+  <!-- Parallel boot telemetry. A deliberately technical read-out: it names the
+       jobs that are downloading/linking at the same time and how long each has
+       been running. Decorative only (aria-hidden) so it never steals focus or
+       spams a screen reader while the game boots. -->
+  <div id="load-monitor" class="hidden" aria-hidden="true">
+    <div class="lm-head"><span class="lm-pulse"></span><span>BOOT PIPELINE</span><span id="lm-count">0/0</span></div>
+    <div id="lm-list"></div>
+    <div id="lm-foot">parallel jobs &middot; <span id="lm-elapsed">0.0s</span></div>
+  </div>
+
   <div id="loader" role="status" aria-live="polite">
     <div id="loader-card">
       <div id="loader-logo">&#128376;</div>
@@ -124,6 +146,7 @@
         <div id="loader-progress-fill"></div>
       </div>
       <div id="loader-status">Building the city&hellip;</div>
+      <div id="loader-detail" aria-live="polite"></div>
       <div id="loader-tip">Tip: hold <b>SPACE</b> to swing and press <b>E</b> at glowing doors!</div>
     </div>
   </div>
@@ -277,6 +300,7 @@
         <button id="resume-btn" class="btn green">&#9654; Keep Playing</button>
         <div class="panel-row">
           <button id="passport-btn-pause" class="btn yellow small" aria-label="Open Harbor Passport" aria-haspopup="dialog" aria-expanded="false">&#128194; Passport</button>
+          <button id="photo-btn-pause" class="btn blue small" aria-label="Open city photo mode">&#128247; Photo</button>
           <button id="howto-btn-pause" class="btn blue small">&#127918; How to Play</button>
           <button id="settings-btn-pause" class="btn yellow small">&#9881; Settings</button>
         </div>
@@ -328,6 +352,7 @@
         <button id="dressup-btn" class="btn yellow big">&#129485; Dress Up</button>
         <div id="menu-actions">
           <button id="howto-btn" class="btn blue small">&#127918; How to Play</button>
+          <button id="photo-btn-menu" class="btn blue small" aria-label="Open city photo mode">&#128247; Photo Mode</button>
           <button id="settings-btn" class="btn yellow small">&#9881; Settings</button>
         </div>
         <div id="daynight-select" title="One full day passes every nine real minutes — these buttons jump the clock">
@@ -379,6 +404,7 @@
               <button class="dn-btn" data-perf-preset="fast">Fast</button>
               <button class="dn-btn selected" data-perf-preset="balanced">Balanced</button>
               <button class="dn-btn" data-perf-preset="sharp">Sharp</button>
+              <button class="dn-btn" data-perf-preset="ultra">Ultra</button>
               <button class="dn-btn" data-perf-preset="phone">Phone</button>
               <button class="dn-btn" data-perf-preset="elite">Elite phone</button>
             </div>
@@ -415,7 +441,7 @@
           <div class="setting-hint">Lower picture detail first if the game stutters. Screen reflections are the most expensive pass. Press <b>G</b> for live FPS and draw-call stats.</div>
           <div class="setting-row">
             <label for="crowd-density">Crowd</label>
-            <input id="crowd-density" type="range" min="50" max="200" step="25" value="200" aria-label="Crowd density" />
+            <input id="crowd-density" type="range" min="50" max="200" step="5" value="200" aria-label="Crowd density" />
             <span id="crowd-density-label" class="setting-value">200%</span>
           </div>
           <div class="setting-hint">More people makes the city busier; lower it if the game slows down.</div>
@@ -478,7 +504,8 @@
           <div class="howto-card"><b>&#9889; Boost</b><span>Hold <kbd>SHIFT</kbd> / <kbd>X</kbd> / <kbd>LT</kbd> to zoom and glide.</span></div>
           <div class="howto-card"><b>&#128377; Climb</b><span>Walk into a building to crawl up it. Press swing to leap off.</span></div>
           <div class="howto-card"><b>&#128421; Interact</b><span>Press <kbd>E</kbd> / <kbd>B</kbd> at glowing doors, stations and friends.</span></div>
-          <div class="howto-card"><b>&#128260; Camera</b><span>Mouse wheel, pinch, <kbd>[</kbd> / <kbd>]</kbd>, or <kbd>LB</kbd> / <kbd>RB</kbd> to zoom.</span></div>
+          <div class="howto-card"><b>&#128260; Camera</b><span>Mouse wheel, pinch, <kbd>[</kbd> / <kbd>]</kbd>, or <kbd>LB</kbd> / <kbd>RB</kbd> to zoom. Drag the view while standing still to look around.</span></div>
+          <div class="howto-card"><b>&#128247; Photo</b><span>Press <kbd>C</kbd>, or use Photo Mode in the pause/menu cards. Drag to orbit, scroll to zoom, capture straight to a PNG.</span></div>
           <div class="howto-card"><b>&#128663; Drive</b><span><kbd>W/S</kbd> throttle and brake, <kbd>A/D</kbd> steer, <kbd>SHIFT</kbd> boost, <kbd>SPACE</kbd> handbrake, <kbd>E</kbd> park.</span></div>
           <div class="howto-card"><b>&#129327; Dive</b><span><kbd>WASD</kbd> swim, <kbd>SPACE</kbd> rise, <kbd>SHIFT</kbd> dive. Use Sonar, Lamp, Journal, Map and Photo tools.</span></div>
           <div class="howto-card"><b>&#127968; Safe spot</b><span>Press <kbd>R</kbd> / <kbd>Y</kbd> to fly back to a friendly rooftop or your dive entry.</span></div>
